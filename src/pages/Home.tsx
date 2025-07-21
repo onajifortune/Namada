@@ -6,10 +6,7 @@ import pattern3 from "../assets/pattern3.png";
 import shadow from "../assets/shadow.png";
 import shadow2 from "../assets/shadow2.png";
 import star from "../assets/star-img.png";
-import ethIcon from "../assets/eth.png";
-import btcIcon from "../assets/btc.png";
 import star2 from "../assets/star-img2.png";
-import ltcIcon from "../assets/ltc.png";
 import Button from "../components/Button";
 import Countdown from "../components/Countdown";
 import iconUp from "../assets/icon-up.png";
@@ -29,6 +26,9 @@ import count2 from "../assets/count2.png";
 import count3 from "../assets/count3.png";
 import shadow4 from "../assets/shadow4.png";
 import assistance from "../assets/assistance.png";
+import zcash from "../assets/zcash.png";
+import zcashIcon from "../assets/zcashIcon.png";
+import near from "../assets/near.png";
 const Home = () => {
   return (
     <div className="">
@@ -52,20 +52,20 @@ const Home = () => {
         <div className="xl:max-w-[1440px] px-6 flex justify-center items-center flex-col w-full z-[100] relative mx-auto  h-[60%]">
           {/* Background graphics */}
           <img
-            src={ethIcon}
-            className="absolute md:w-[150px] w-[100px] animate-bounce md:h-[150px] h-[100px] md:top-[80%] top-[100%] left-10"
+            src={zcash}
+            className="absolute -rotate-45 md:w-[150px] w-[100px] animate-bounce md:h-[150px] h-[100px] md:top-[80%] top-[100%] left-10"
           />
           <img
             src={star2}
             className="absolute md:w-[71px] w-[36px] animate-pulse md:h-[60px] h-[30px] md:top-[7%] -top-10 lg:left-45 left-10"
           />
           <img
-            src={btcIcon}
-            className="absolute md:w-[150px] w-[100px] animate-bounce md:h-[150px] h-[100px] lg:top-[0%] -top-10 lg:right-45 right-15"
+            src={zcashIcon}
+            className="absolute md:w-[100px] w-[60px] animate-bounce md:h-[100px] h-[60px] lg:top-[0%] -top-10 lg:right-45 right-15"
           />
           <img
-            src={ltcIcon}
-            className="absolute md:w-[150px] w-[100px]  bottom-20  md:right-[25%] right-10"
+            src={near}
+            className="absolute md:w-[100px] w-[60px]  bottom-30  md:right-[25%] right-10"
           />
           <img
             src={star}
@@ -82,10 +82,10 @@ const Home = () => {
 
           <div className="mt-8 flex flex-wrap justify-center space-x-4">
             <Button className="h-[56px] bg-white !text-black md:w-[254px] text-[18px]">
-              Join the Hackathon
+              <a href="">Join the Hackathon</a>
             </Button>
             <Button className="md:w-[194px] h-[56px]" variant="filled">
-              Zcash Discord
+              <a href="https://discord.gg/zcash">Zcash Discord</a>
             </Button>
           </div>
 
@@ -109,15 +109,15 @@ const Home = () => {
                 our step-by-step guide to launch your own zcashd node.
               </p>
               <div className="pt-8 flex flex-col space-y-4 text-start">
-                <Button className="h-[48px] flex justify-between items-center w-[287px]">
-                  Zcash Documentation <img src={iconUp} alt="" />
+                <Button className="h-[48px] w-[287px]">
+                  <a href="https://zebra.zfnd.org/" className="flex justify-between items-center">Zcash Documentation <img src={iconUp} alt="" /></a>
                 </Button>
-                <Button className="h-[48px] flex justify-between items-center w-[165px]">
-                  RPC Docs <img src={iconUp} alt="" />
+                <Button className="h-[48px] w-[165px]">
+                  <a href="https://github.com/zingolabs/zaino/blob/dev/docs/rpc_api.md" className="flex justify-between items-center">RPC Docs <img src={iconUp} alt="" /></a>
                 </Button>
-                <Button className="h-[48px] flex justify-between items-center w-[278px]">
+                {/* <Button className="h-[48px] flex justify-between items-center w-[278px]">
                   Akash Network Guide <img src={iconUp} alt="" />
-                </Button>
+                </Button> */}
               </div>
               <div className="absolute rounded-full w-[107px] h-[107px] hidden lg:flex justify-center items-center glass-container-full">
                 <p className="text-[48px] leading-10 font-mono font-[700] text-white">
@@ -135,7 +135,7 @@ const Home = () => {
               </p>
               <div className="pt-8">
                 <Button className="h-[48px] font-space flex justify-between items-center w-[215px]">
-                  Build on Zcash <img src={iconUp} alt="" />
+                  <a href="https://zechub.wiki/developers" className="flex justify-between items-center">Build on Zcash <img src={iconUp} alt="" /></a>
                 </Button>
               </div>
 
@@ -195,7 +195,7 @@ const Home = () => {
                       1st Prize
                     </p>
                     <p className="font-space text-[26.91px] font-[700]">
-                      15 ZEC
+                      100 ZEC
                     </p>
                   </div>
                 </div>
@@ -215,7 +215,7 @@ const Home = () => {
                       2nd Prize
                     </p>
                     <p className="font-space text-[26.91px] font-[700]">
-                      7 ZEC
+                      50 ZEC
                     </p>
                   </div>
                 </div>
@@ -232,7 +232,7 @@ const Home = () => {
                       3rd Prize
                     </p>
                     <p className="font-space text-[26.91px] font-[700]">
-                      5 ZEC
+                      25 ZEC
                     </p>
                   </div>
                 </div>
@@ -259,7 +259,7 @@ const Home = () => {
                       4th Prize
                     </p>
                     <p className="font-space text-[26.91px] font-[700]">
-                      3 ZEC
+                      25 ZEC
                     </p>
                   </div>
                 </div>
@@ -276,7 +276,7 @@ const Home = () => {
                       5th Prize
                     </p>
                     <p className="font-space text-[26.91px] font-[700]">
-                      2 ZEC
+                      7 ZEC
                     </p>
                   </div>
                 </div>
@@ -300,8 +300,7 @@ const Home = () => {
                 How to Participate
               </h1>
               <p className="font-[400] font-space leading-[28px] w-[332px] text-center text-[16px] h-[100px]">
-                Set up your Zcash node, build your app using ZCash RPC and share
-                your project in the Zechub discord channel by October 11.
+                Set up a Zebra Node, Zaino Indexer or Zingo-cli to build your app and share your project in the Zechub discord channel 
               </p>
               <img
                 src={shadow4}
@@ -315,9 +314,7 @@ const Home = () => {
                 What to Submit
               </h1>
               <p className="font-[400] font-space leading-[28px] w-[332px] text-center text-[16px] h-[100px]">
-                To be eligible for a prize, you must provide some basic
-                documentation of your project - setup, execution, and final
-                presentation of your Zcash app.
+                To be eligible for a prize, you must provide a video demo showing interaction with the Zcash network.  Documentation of your project to be submitted to the zechub hackathon repository. 
               </p>
               <img
                 src={shadow4}
@@ -348,7 +345,7 @@ const Home = () => {
               className="md:w-[354px] w-[250px] h-[56px] absolute left-1/2 -translate-x-1/2 bottom-0"
               variant="filled"
             >
-              Join Zcash Global Discord
+              <a href="https://discord.gg/zcash">Join Zcash Global Discord</a>
             </Button>
           </div>
         </div>
@@ -378,8 +375,8 @@ const Home = () => {
             We gladly accept ZEC via our Donations page,and AKT Akash Token via
             the DAO. Thank you for your support
           </p>
-          <Button variant="filled" className="w-[292px] h-[56px]">
-            Make Donations
+          <Button variant="filled" className="w-[292px] relative z-50 h-[56px]">
+            <a href="https://zechub.wiki/donation">Make Donations</a>
           </Button>
           <div className="absolute z-1">
             <img
