@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import "tailwindcss";
+
+body {
+  background-color: #020717;
+  font-family: "Inter";
+}
+
+.font-space {
+  font-family: Space Grotesk;
+}
+
+.font-orbitron {
+  font-family: "Orbitron";
+}
+
+.font-inter {
+  font-family: "Inter";
+}
+
+.font-mono {
+  font-family: Space Mono;
+}
+
+.glass-container {
+  background: radial-gradient(
+    111.14% 111.14% at 8.37% 0%,
+    rgba(40, 100, 151, 0.36) 0%,
+    rgba(40, 100, 151, 0) 100%
+  );
+  border: 1px solid transparent;
+  border-image: radial-gradient(
+        94.31% 66.31% at -53.25% 10.23%,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.06) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        86.84% 30.42% at 129.28% 66.93%,
+        #2f78be 0%,
+        rgba(47, 120, 190, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        41.06% 41.06% at 51.09% -22.85%,
+        #000000 0%,
+        rgba(255, 255, 255, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+
+  backdrop-filter: blur(5px);
+}
+
+.glass-container-full {
+  position: absolute;
+  background: radial-gradient(
+    111.14% 111.14% at 8.37% 0%,
+    rgba(40, 100, 151, 0.36) 0%,
+    rgba(40, 100, 151, 0) 100%
+  );
+  backdrop-filter: blur(22.61px);
+  border-radius: 1000px;
+  z-index: 1;
+  top: -10%;
+  left: 90%;
+}
+
+.glass-container-full::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px; /* border thickness */
+  border-radius: 1000px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.06),
+    rgba(47, 120, 190, 0.2),
+    rgba(0, 0, 0, 0.05)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
