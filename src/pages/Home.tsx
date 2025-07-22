@@ -77,13 +77,13 @@ const Home = () => {
           </h1>
           <p className="max-w-xl mx-auto font-space md:text-[20px] text-[16px] text-center text-white">
             Challenge yourself to build with Zcash—one of the leading
-            privacy-preserving blockchains.
+            privacy-preserving blockchains. - Join the Hackathon
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center space-x-4">
-            <Button className="h-[56px] bg-white !text-black md:w-[254px] text-[18px]">
+            {/* <Button className="h-[56px] bg-white !text-black md:w-[254px] text-[18px]">
               <a href="">Join the Hackathon</a>
-            </Button>
+            </Button> */}
             <Button className="md:w-[194px] h-[56px]" variant="filled">
               <a href="https://discord.gg/zcash">Zcash Discord</a>
             </Button>
