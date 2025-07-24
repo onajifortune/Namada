@@ -15,8 +15,8 @@ const Header = () => {
   }, []);
   return (
     <div
-      className={`w-screen h-[60px] fixed top-0 md:h-[80px] bg-[#020717] transition-all duration-300 ${
-        scrolled ? "z-[120]" : "z-10"
+      className={`w-screen h-[60px] fixed top-0 md:h-[80px]  transition-all duration-300 ${
+        scrolled ? "z-[120] bg-[#020717]" : "z-100"
       }`}
     >
       <div className="md:max-w-[1440px] h-[60px] md:h-[80px] mx-auto w-full">
@@ -45,12 +45,18 @@ const Header = () => {
 
               {/* Right: Buttons */}
               <div className="flex space-x-3">
+                <Button className="text-[16px] block font-inter h-[40px] w-[96px]">
+                  <a href="/">Home</a>
+                </Button>
                 <Button className="text-[16px] hidden lg:block font-inter h-[40px] w-[96px]">
                   <a href="https://zechub.wiki/dao">DAO</a>
                 </Button>
                 <Button className="text-[16px] hidden lg:block font-inter h-[40px] w-[127px]">
                   <a href="https://zechub.wiki/dashboard">Dashboard</a>
                 </Button>
+                {/* <Button className="text-[16px] block font-inter md:h-[40px] md:w-[127px]">
+                  <a href="https://zechub.wiki/dashboard">FAQs</a>
+                </Button> */}
                 <Button
                   className="text-[14px] md:text-[16px] font-inter md:h-[40px] md:w-[120px]"
                   variant="filled"

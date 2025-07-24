@@ -81,9 +81,9 @@ const Home = () => {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center space-x-4">
-            {/* <Button className="h-[56px] bg-white !text-black md:w-[254px] text-[18px]">
-              <a href="">Join the Hackathon</a>
-            </Button> */}
+            <Button className="h-[56px] bg-white !text-black md:w-[254px] text-[18px]">
+              <a href="/rules">Hackathon Rules</a>
+            </Button>
             <Button className="md:w-[194px] h-[56px]" variant="filled">
               <a href="https://discord.gg/zcash">Zcash Discord</a>
             </Button>
@@ -259,7 +259,7 @@ const Home = () => {
                       4th Prize
                     </p>
                     <p className="font-space text-[18px] md:text-[26.91px] font-[700]">
-                      25 ZEC
+                      20 ZEC
                     </p>
                   </div>
                 </div>
@@ -276,7 +276,7 @@ const Home = () => {
                       5th Prize
                     </p>
                     <p className="font-space text-[18px] md:text-[26.91px] font-[700]">
-                      7 ZEC
+                      12 ZEC
                     </p>
                   </div>
                 </div>
@@ -329,7 +329,7 @@ const Home = () => {
               </h1>
               <p className="font-[400] font-space leading-[28px] w-[332px] text-center text-[14px] md:text-[16px]  h-[100px]">
                 Voting happens via a public ZecHub DAO poll in the Zcash Global
-                Discord. Submit your project before October 12 to be eligible.
+                Discord. Submit your project before August 29th to be eligible.
               </p>
               <img
                 src={shadow4}
@@ -352,28 +352,30 @@ const Home = () => {
       </div>
 
       <div className="w-full py-12 2xl:px-0 px-4 md:px-10">
-        <div className="md:max-w-[1440px]  mx-auto flex flex-col justify-center items-center">
+        <div className="md:max-w-[1440px] md:h-[478px] py-6 md:py-0 relative mx-auto flex flex-col justify-center gap-6 items-center">
           <img
             src={assistance}
             alt=""
-            className="md:h-[478px]  md:w-[1034px]"
+            className="md:h-[478px] absolute md:w-[1034px]"
           />
+          <h1 className="sm:text-[30px] text-[18px] lg:text-[48px] font-orbitron font-[600] text-center tracking-normal md:w-[663px] text-white  leading-[125%]">
+            Need Assistance?
+          </h1>
+        
+          <p className="leading-[28px] font-[400] font-space sm:text-[16px] text-[14px] text-white md:w-[562px] text-center">
+           If you need assistance with your project, feel free to give us a shout in the Zcash Global Discord. #Community-infra Channel.
+          </p>
         </div>
       </div>
 
       <div className="w-full py-12 2xl:px-0 px-4 md:px-10">
         <div className="md:max-w-[1440px] gap-8 md:px-0 px-6 glass-container min-h-[521px] rounded-[10px]  mx-auto flex flex-col justify-center items-center relative">
           <h1 className="sm:text-[30px] text-[18px] lg:text-[48px] font-orbitron font-[600] text-center tracking-normal md:w-[663px] text-white  leading-[125%]">
-            Support the Hackathon with Your Donations!
+            If you like to support to support our efforts
           </h1>
+        
           <p className="leading-[28px] font-[400] font-space sm:text-[16px] text-[14px] text-white md:w-[851px] text-center">
-            Your contributions can help us 1) run nodes for contestants to build
-            on the Zcash network, 2) increase the prize pool. If you'd like to
-            support our efforts, please consider making a donation.
-          </p>
-          <p className="leading-[28px] font-[400] font-space sm:text-[16px] text-[14px] text-white md:w-[851px] text-center">
-            We gladly accept ZEC via our Donations page,and AKT Akash Token via
-            the DAO. Thank you for your support
+            We gladly accept ZEC via our Donations page, Thank you for your support
           </p>
           <Button variant="filled" className="sm:w-[292px] relative z-50 h-[56px]">
             <a href="https://zechub.wiki/donation">Make Donations</a>
