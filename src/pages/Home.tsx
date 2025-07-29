@@ -181,7 +181,7 @@ const Home = () => {
 
           <div className="flex lg:flex-row flex-col md:pt-36 pt-24 justify-center xl:justify-between items-center  w-full  gap-4">
             <div className="space-y-8 md:w-fit w-full md:px-0 px-8">
-              <div className="md:md:w-[316px] w-full h-[145px] flex justify-center items-center bg-[#F79329] rounded-[21.21px] relative z-[50]">
+              <div className="md:md:w-[350px] w-full h-[145px] flex justify-center items-center bg-[#F79329] rounded-[21.21px] relative z-[50]">
                 <div className="absolute w-full flex justify-center items-center">
                   <img
                     src={borderLight}
@@ -195,13 +195,13 @@ const Home = () => {
                       1st Prize
                     </p>
                     <p className="font-space text-[18px] md:text-[26.91px] font-[700]">
-                      100 ZEC
+                      50 ZEC + NEAR
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="md:w-[316px] w-full h-[145px] flex justify-center items-center bg-[#28649745] rounded-[21.21px] relative z-[50]">
+              <div className="md:w-[350px] w-full h-[145px] flex justify-center items-center bg-[#28649745] rounded-[21.21px] relative z-[50]">
                 <div className="absolute w-full flex justify-center items-center">
                   <img
                     src={borderLight}
@@ -215,13 +215,13 @@ const Home = () => {
                       2nd Prize
                     </p>
                     <p className="font-space text-[18px] md:text-[26.91px] font-[700]">
-                      50 ZEC
+                      12.5 ZEC + NEAR
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="md:w-[316px] w-full h-[145px] flex justify-center items-center bg-[#96A2AC] rounded-[21.21px] relative z-[50]">
+              <div className="md:w-[316px] w-full h-[145px] hidden justify-center items-center bg-[#96A2AC] rounded-[21.21px] relative z-[50]">
                 <div className="absolute w-full flex justify-center items-center">
                   <img src={borderLight} className="md:w-[291px] w-[95%] h-[123px]" />
                 </div>
@@ -232,7 +232,7 @@ const Home = () => {
                       3rd Prize
                     </p>
                     <p className="font-space text-[18px] md:text-[26.91px] font-[700]">
-                      25 ZEC
+                      10 ZEC + NEAR
                     </p>
                   </div>
                 </div>
@@ -256,16 +256,16 @@ const Home = () => {
                   <img src={medal} className="w-[56px] h-[56px]" />
                   <div className="text-white">
                     <p className="font-space md:text-[21.21px] font-[500]">
-                      4th Prize
+                      3rd Prize
                     </p>
                     <p className="font-space text-[18px] md:text-[26.91px] font-[700]">
-                      20 ZEC
+                      10 ZEC + NEAR
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="md:w-[316px] w-full h-[145px] flex justify-center items-center bg-[#D3CAAE] rounded-[21.21px] relative z-[50]">
+              <div className="md:w-[316px] w-full h-[145px] hidden justify-center items-center bg-[#D3CAAE] rounded-[21.21px] relative z-[50]">
                 <div className="absolute w-full flex justify-center items-center">
                   <img src={borderLight} className="md:w-[291px] w-[95%] h-[123px]" />
                 </div>

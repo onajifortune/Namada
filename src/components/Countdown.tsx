@@ -20,7 +20,7 @@ export default function Countdown() {
     const calculateTimeLeft = () => {
       const now = new Date();
       const currentYear = now.getFullYear();
-      const targetDate = new Date(currentYear, 7, 8); // August is month 7 (0-indexed)
+      const targetDate = new Date(currentYear, 7, 18); // August is month 7 (0-indexed)
       
       // If August 8 has already passed this year, set it for next year
       if (now > targetDate) {
