@@ -489,13 +489,13 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
               </tr>
             </thead>
             <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-              {data.Proposal.map((proposal: any) => (
+              {data.Proposal.map((proposal: any , index : number) => (
                 <tr
                   key={proposal.id}
                   className="hover:bg-gray-50 dark:hover:bg-gray-700"
                 >
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                    {proposal.id}
+                    {index + 1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                     {proposal.Type}
