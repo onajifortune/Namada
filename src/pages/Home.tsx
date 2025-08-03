@@ -375,7 +375,7 @@ const ParametersTab = ({ data, loading, error }: any) => {
               <h3 className="text-md font-medium mt-6 text-gray-300 mb-3">
                 Implicit VP hash
               </h3>
-              <div className="-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
+              <div className="bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
                 <div className="text-xs font-mono text-gray-300 mb-1 break-all">
                   {data.Protocol_Parameters[0].Implicit_VP_hash}
                 </div>
