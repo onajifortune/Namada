@@ -100,25 +100,23 @@ const GovernanceDashboard = () => {
 
   if (loading.params && loading.props) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-50 dark:bg-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 dark:border-blue-400"></div>
+      <div className="flex justify-center items-center h-screen bg-gray-900">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-400"></div>
       </div>
     );
   }
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-200 bg-white ${
-        darkMode ? "dark" : ""
-      }`}
+      className={`min-h-screen transition-colors duration-200 bg-[#1e2939]`}
     >
-      <div className="bg-gray-50 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
+      <div className="text-gray-100 min-h-screen">
         {/* Header Section */}
-        <header className="bg-white dark:bg-gray-800 shadow-sm">
+        <header className="bg-gray-800 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-4">
-                <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+                <h1 className="text-2xl font-bold text-white">
                   Namada Governance Dashboard
                 </h1>
               </div>
@@ -142,14 +140,14 @@ const GovernanceDashboard = () => {
         {/* Main Content */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Tabs Navigation */}
-          <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
+          <div className="border-b border-gray-700 mb-6">
             <nav className="-mb-px flex space-x-8">
               <button
                 onClick={() => setActiveTab("parameters")}
                 className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "parameters"
-                    ? "border-blue-500 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                    ? "text-blue-400 border-blue-400"
+                    : "border-transparent hover:border-gray-300 text-gray-400 hover:text-gray-300"
                 }`}
               >
                 Protocol Parameters
@@ -158,8 +156,8 @@ const GovernanceDashboard = () => {
                 onClick={() => setActiveTab("proposals")}
                 className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "proposals"
-                    ? "border-blue-500 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                    ? "text-blue-400 border-blue-400"
+                    : "border-transparent hover:border-gray-300 text-gray-400 hover:text-gray-300"
                 }`}
               >
                 Governance Proposals
@@ -168,8 +166,8 @@ const GovernanceDashboard = () => {
                 onClick={() => setActiveTab("validators")}
                 className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "validators"
-                    ? "border-blue-500 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                    ? "text-blue-400 border-blue-400"
+                    : "border-transparent hover:border-gray-300 text-gray-400 hover:text-gray-300"
                 }`}
               >
                 Validators
@@ -206,11 +204,11 @@ const GovernanceDashboard = () => {
   );
 };
 
-const ParametersTab = ({ data, loading, error, darkMode }: any) => {
+const ParametersTab = ({ data, loading, error }: any) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 dark:border-blue-400"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-400"></div>
       </div>
     );
   }
@@ -218,9 +216,7 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
   if (error) {
     return (
       <div
-        className={`p-4 rounded-lg ${
-          darkMode ? "bg-gray-800 text-red-400" : "bg-white text-red-600"
-        }`}
+        className={`p-4 rounded-lg bg-gray-800 text-red-400`}
       >
         <strong>Error:</strong> {error}
       </div>
@@ -234,9 +230,9 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
       {/* Governance Parameters Grid */}
       <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
         {/* Governance Parameters Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+        <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700">
+            <h2 className="text-lg font-semibold text-gray-200">
               Governance Parameters
             </h2>
           </div>
@@ -245,10 +241,10 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
               {Object.entries(data.Governance_Parameters[0]).map(
                 ([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">
+                    <span className="text-sm text-gray-300">
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-sm font-medium text-gray-800 dark:text-gray-100">
+                    <span className="text-sm font-medium text-gray-100">
                       {typeof value === "number"
                         ? value.toLocaleString()
                         : String(value)}
@@ -261,9 +257,9 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
         </div>
 
         {/* Public Goods Funding Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+        <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700">
+            <h2 className="text-lg font-semibold text-gray-200">
               Public Goods Funding
             </h2>
           </div>
@@ -272,10 +268,10 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
               {Object.entries(data.Public_Goods_Funding_Parameters[0]).map(
                 ([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">
+                    <span className="text-sm text-gray-300">
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-sm font-medium text-gray-800 dark:text-gray-100">
+                    <span className="text-sm font-medium -gray-100">
                       {typeof value === "number" ? `${value}` : String(value)}
                     </span>
                   </div>
@@ -286,9 +282,9 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
         </div>
 
         {/* Protocol Parameters Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+        <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700">
+            <h2 className="text-lg font-semibold text-gray-200">
               Protocol Parameters
             </h2>
           </div>
@@ -306,10 +302,10 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
                 )
                 .map(([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">
+                    <span className="text-sm text-gray-300">
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-sm font-medium text-gray-800 dark:text-gray-100">
+                    <span className="text-sm font-medium text-gray-100">
                       {typeof value === "boolean"
                         ? value
                           ? "Yes"
@@ -323,9 +319,9 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
         </div>
 
         {/* Proof of Stake Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+        <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-700">
+            <h2 className="text-lg font-semibold text-gray-200">
               Proof of Stake
             </h2>
           </div>
@@ -334,10 +330,10 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
               {Object.entries(data.Proof_Of_Stake_Parmeters[0]).map(
                 ([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span className="text-sm text-gray-600 dark:text-gray-300">
+                    <span className="text-sm -gray-300">
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-sm font-medium text-gray-800 dark:text-gray-100">
+                    <span className="text-sm font-medium text-gray-100">
                       {typeof value === "number" && key.includes("rate")
                         ? `${value * 100}%`
                         : String(value)}
@@ -351,9 +347,9 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
       </div>
 
       {/* Allowlists Section */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+      <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-700">
+          <h2 className="text-lg font-semibold text-gray-200">
             Allowlists
           </h2>
         </div>
@@ -361,26 +357,26 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
           <div className="grid gap-6 md:grid-cols-2">
             {/* VP Allowlist */}
             <div>
-              <h3 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <h3 className="text-md font-medium text-gray-300 mb-3">
                 VP Allowlist
               </h3>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
+              <div className="bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
                 {data.Protocol_Parameters[0].VP_allowlist.map(
                   (hash: string, i: number) => (
                     <div
                       key={i}
-                      className="text-xs font-mono text-gray-600 dark:text-gray-300 mb-1 break-all"
+                      className="text-xs font-mono text-gray-300 mb-1 break-all"
                     >
                       {hash}
                     </div>
                   )
                 )}
               </div>
-              <h3 className="text-md font-medium mt-6 text-gray-700 dark:text-gray-300 mb-3">
+              <h3 className="text-md font-medium mt-6 text-gray-300 mb-3">
                 Implicit VP hash
               </h3>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
-                <div className="text-xs font-mono text-gray-600 dark:text-gray-300 mb-1 break-all">
+              <div className="bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
+                <div className="text-xs font-mono text-gray-300 mb-1 break-all">
                   {data.Protocol_Parameters[0].Implicit_VP_hash}
                 </div>
               </div>
@@ -388,15 +384,15 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
 
             {/* Transactions Allowlist */}
             <div>
-              <h3 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <h3 className="text-md font-medium text-gray-300 mb-3">
                 Transactions Allowlist
               </h3>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
+              <div className="bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
                 {data.Protocol_Parameters[0].Transactions_allowlist.map(
                   (hash: string, i: number) => (
                     <div
                       key={i}
-                      className="text-xs font-mono text-gray-600 dark:text-gray-300 mb-1 break-all"
+                      className="text-xs font-mono text-gray-300 mb-1 break-all"
                     >
                       {hash}
                     </div>
@@ -415,7 +411,7 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 dark:border-blue-400"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-400"></div>
       </div>
     );
   }
@@ -423,9 +419,7 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
   if (error) {
     return (
       <div
-        className={`p-4 rounded-lg ${
-          darkMode ? "bg-gray-800 text-red-400" : "bg-white text-red-600"
-        }`}
+        className={`p-4 rounded-lg bg-gray-800 text-red-400`}
       >
         <strong>Error:</strong> {error}
       </div>
@@ -437,79 +431,79 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
   return (
     <div className="space-y-6">
       {/* Current Epoch */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow px-6 py-4">
-        <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+      <div className="bg-gray-800 rounded-lg shadow px-6 py-4">
+        <h2 className="text-lg font-semibold text-gray-200">
           Current Epoch:{" "}
           <span className="font-bold">{data.Last_committed_epoch}</span>
         </h2>
       </div>
 
       {/* Proposals Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+      <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-50 dark:bg-gray-700">
+          <table className="min-w-full divide-y divide-gray-700">
+            <thead className="-gray-700">
               <tr>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
                 >
                   ID
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
                 >
                   Type
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
                 >
                   Author
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
                 >
                   Start Epoch
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
                 >
                   End Epoch
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
                 >
                   Activation Epoch
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="bg-gray-800 divide-y divide-gray-700">
               {data.Proposal.map((proposal: any , index : number) => (
                 <tr
                   key={proposal.id}
                   className="hover:bg-gray-50 dark:hover:bg-gray-700"
                 >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">
                     {index + 1}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {proposal.Type}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-mono">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-mono">
                     {proposal.Author}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {proposal.Start_Epoch}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {proposal.End_Epoch}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {proposal.Activation_Epoch}
                   </td>
                 </tr>
@@ -526,7 +520,7 @@ const ValidatorTab = ({ data, loading, error, darkMode }: any) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 dark:border-blue-400"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-400"></div>
       </div>
     );
   }
