@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import ClientDashboard from "../components/ShieldedPool";
 
 const GovernanceDashboard = () => {
   const [activeTab, setActiveTab] = useState<
-    "parameters" | "proposals" | "validators"
+    "parameters" | "proposals" | "validators" | "charts"
   >("parameters");
   const [darkMode, setDarkMode] = useState(false);
   const [paramsData, setParamsData] = useState<any>(null);
@@ -68,7 +69,7 @@ const GovernanceDashboard = () => {
       }
     };
 
-    // Fetch Proposals Data
+    // Fetch Validator Data
     const fetchValidator = async () => {
       try {
         const response = await fetch(
@@ -94,13 +95,17 @@ const GovernanceDashboard = () => {
     fetchValidator();
   }, []);
 
-  // const toggleDarkMode = () => {
-  //   setDarkMode(!darkMode);
-  // };
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   if (loading.params && loading.props) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-900">
+      <div
+        className={`flex justify-center items-center h-screen ${
+          darkMode ? "bg-gray-900" : "bg-gray-100"
+        }`}
+      >
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-400"></div>
       </div>
     );
@@ -108,22 +113,28 @@ const GovernanceDashboard = () => {
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-200 bg-[#1e2939]`}
+      className={`min-h-screen ${
+        darkMode ? "dark bg-background" : "bg-background"
+      }`}
     >
-      <div className="text-gray-100 min-h-screen">
+      <div className="min-h-screen text-foreground">
         {/* Header Section */}
-        <header className="bg-gray-800 shadow-sm">
+        <header className="bg-card shadow-sm transition-theme fixed w-[100vw] z-[99]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-4">
-                <h1 className="text-2xl font-bold text-white">
+                <h1 className="text-2xl font-bold text-foreground">
                   Namada Governance Dashboard
                 </h1>
               </div>
-              {/* <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4">
                 <button
                   onClick={toggleDarkMode}
-                  className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-yellow-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                  className={`p-2 rounded-full transition-all duration-150 ${
+                    darkMode
+                      ? "bg-gray-700 text-yellow-300 hover:bg-gray-600"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
                   aria-label="Toggle dark mode"
                 >
                   {darkMode ? (
@@ -132,22 +143,26 @@ const GovernanceDashboard = () => {
                     <span className="w-5 h-5 block">🌙</span>
                   )}
                 </button>
-              </div> */}
+              </div>
             </div>
           </div>
         </header>
 
         {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pt-[68px]">
           {/* Tabs Navigation */}
-          <div className="border-b border-gray-700 mb-6">
+          <div className="border-b border-border mb-6 transition-theme">
             <nav className="-mb-px flex space-x-8">
               <button
                 onClick={() => setActiveTab("parameters")}
                 className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "parameters"
                     ? "text-blue-400 border-blue-400"
-                    : "border-transparent hover:border-gray-300 text-gray-400 hover:text-gray-300"
+                    : `border-transparent ${
+                        darkMode
+                          ? "hover:border-gray-300 text-gray-400 hover:text-gray-300"
+                          : "hover:border-gray-300 text-gray-600 hover:text-gray-700"
+                      }`
                 }`}
               >
                 Protocol Parameters
@@ -157,7 +172,11 @@ const GovernanceDashboard = () => {
                 className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "proposals"
                     ? "text-blue-400 border-blue-400"
-                    : "border-transparent hover:border-gray-300 text-gray-400 hover:text-gray-300"
+                    : `border-transparent ${
+                        darkMode
+                          ? "hover:border-gray-300 text-gray-400 hover:text-gray-300"
+                          : "hover:border-gray-300 text-gray-600 hover:text-gray-700"
+                      }`
                 }`}
               >
                 Governance Proposals
@@ -167,10 +186,28 @@ const GovernanceDashboard = () => {
                 className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "validators"
                     ? "text-blue-400 border-blue-400"
-                    : "border-transparent hover:border-gray-300 text-gray-400 hover:text-gray-300"
+                    : `border-transparent ${
+                        darkMode
+                          ? "hover:border-gray-300 text-gray-400 hover:text-gray-300"
+                          : "hover:border-gray-300 text-gray-600 hover:text-gray-700"
+                      }`
                 }`}
               >
                 Validators
+              </button>
+              <button
+                onClick={() => setActiveTab("charts")}
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === "charts"
+                    ? "text-blue-400 border-blue-400"
+                    : `border-transparent ${
+                        darkMode
+                          ? "hover:border-gray-300 text-gray-400 hover:text-gray-300"
+                          : "hover:border-gray-300 text-gray-600 hover:text-gray-700"
+                      }`
+                }`}
+              >
+                Charts
               </button>
             </nav>
           </div>
@@ -190,13 +227,15 @@ const GovernanceDashboard = () => {
               error={error.props}
               darkMode={darkMode}
             />
-          ) : (
+          ) : activeTab === "validators" ? (
             <ValidatorTab
               data={validatorData}
               loading={loading.validator}
               error={error.validator}
               darkMode={darkMode}
             />
+          ) : (
+            <ClientDashboard />
           )}
         </main>
       </div>
@@ -204,7 +243,7 @@ const GovernanceDashboard = () => {
   );
 };
 
-const ParametersTab = ({ data, loading, error }: any) => {
+const ParametersTab = ({ data, loading, error, darkMode }: any) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -216,7 +255,9 @@ const ParametersTab = ({ data, loading, error }: any) => {
   if (error) {
     return (
       <div
-        className={`p-4 rounded-lg bg-gray-800 text-red-400`}
+        className={`p-4 rounded-lg ${
+          darkMode ? "bg-gray-800 text-red-400" : "bg-white text-red-600"
+        }`}
       >
         <strong>Error:</strong> {error}
       </div>
@@ -230,9 +271,21 @@ const ParametersTab = ({ data, loading, error }: any) => {
       {/* Governance Parameters Grid */}
       <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
         {/* Governance Parameters Card */}
-        <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-200">
+        <div
+          className={`rounded-lg shadow overflow-hidden ${
+            darkMode ? "bg-gray-800" : "bg-white"
+          }`}
+        >
+          <div
+            className={`px-6 py-4 border-b ${
+              darkMode ? "border-gray-700" : "border-gray-200"
+            }`}
+          >
+            <h2
+              className={`text-lg font-semibold ${
+                darkMode ? "text-gray-200" : "text-gray-800"
+              }`}
+            >
               Governance Parameters
             </h2>
           </div>
@@ -241,10 +294,18 @@ const ParametersTab = ({ data, loading, error }: any) => {
               {Object.entries(data.Governance_Parameters[0]).map(
                 ([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span className="text-sm text-gray-300">
+                    <span
+                      className={`text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-sm font-medium text-gray-100">
+                    <span
+                      className={`text-sm font-medium ${
+                        darkMode ? "text-gray-100" : "text-gray-900"
+                      }`}
+                    >
                       {typeof value === "number"
                         ? value.toLocaleString()
                         : String(value)}
@@ -257,9 +318,21 @@ const ParametersTab = ({ data, loading, error }: any) => {
         </div>
 
         {/* Public Goods Funding Card */}
-        <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-200">
+        <div
+          className={`rounded-lg shadow overflow-hidden ${
+            darkMode ? "bg-gray-800" : "bg-white"
+          }`}
+        >
+          <div
+            className={`px-6 py-4 border-b ${
+              darkMode ? "border-gray-700" : "border-gray-200"
+            }`}
+          >
+            <h2
+              className={`text-lg font-semibold ${
+                darkMode ? "text-gray-200" : "text-gray-800"
+              }`}
+            >
               Public Goods Funding
             </h2>
           </div>
@@ -268,10 +341,18 @@ const ParametersTab = ({ data, loading, error }: any) => {
               {Object.entries(data.Public_Goods_Funding_Parameters[0]).map(
                 ([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span className="text-sm text-gray-300">
+                    <span
+                      className={`text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-sm font-medium -gray-100">
+                    <span
+                      className={`text-sm font-medium ${
+                        darkMode ? "text-gray-100" : "text-gray-900"
+                      }`}
+                    >
                       {typeof value === "number" ? `${value}` : String(value)}
                     </span>
                   </div>
@@ -282,9 +363,21 @@ const ParametersTab = ({ data, loading, error }: any) => {
         </div>
 
         {/* Protocol Parameters Card */}
-        <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-200">
+        <div
+          className={`rounded-lg shadow overflow-hidden ${
+            darkMode ? "bg-gray-800" : "bg-white"
+          }`}
+        >
+          <div
+            className={`px-6 py-4 border-b ${
+              darkMode ? "border-gray-700" : "border-gray-200"
+            }`}
+          >
+            <h2
+              className={`text-lg font-semibold ${
+                darkMode ? "text-gray-200" : "text-gray-800"
+              }`}
+            >
               Protocol Parameters
             </h2>
           </div>
@@ -302,10 +395,18 @@ const ParametersTab = ({ data, loading, error }: any) => {
                 )
                 .map(([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span className="text-sm text-gray-300">
+                    <span
+                      className={`text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-sm font-medium text-gray-100">
+                    <span
+                      className={`text-sm font-medium ${
+                        darkMode ? "text-gray-100" : "text-gray-900"
+                      }`}
+                    >
                       {typeof value === "boolean"
                         ? value
                           ? "Yes"
@@ -319,9 +420,21 @@ const ParametersTab = ({ data, loading, error }: any) => {
         </div>
 
         {/* Proof of Stake Card */}
-        <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-200">
+        <div
+          className={`rounded-lg shadow overflow-hidden ${
+            darkMode ? "bg-gray-800" : "bg-white"
+          }`}
+        >
+          <div
+            className={`px-6 py-4 border-b ${
+              darkMode ? "border-gray-700" : "border-gray-200"
+            }`}
+          >
+            <h2
+              className={`text-lg font-semibold ${
+                darkMode ? "text-gray-200" : "text-gray-800"
+              }`}
+            >
               Proof of Stake
             </h2>
           </div>
@@ -330,10 +443,18 @@ const ParametersTab = ({ data, loading, error }: any) => {
               {Object.entries(data.Proof_Of_Stake_Parmeters[0]).map(
                 ([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span className="text-sm -gray-300">
+                    <span
+                      className={`text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-sm font-medium text-gray-100">
+                    <span
+                      className={`text-sm font-medium ${
+                        darkMode ? "text-gray-100" : "text-gray-900"
+                      }`}
+                    >
                       {typeof value === "number" && key.includes("rate")
                         ? `${value * 100}%`
                         : String(value)}
@@ -347,9 +468,21 @@ const ParametersTab = ({ data, loading, error }: any) => {
       </div>
 
       {/* Allowlists Section */}
-      <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-700">
-          <h2 className="text-lg font-semibold text-gray-200">
+      <div
+        className={`rounded-lg shadow overflow-hidden ${
+          darkMode ? "bg-gray-800" : "bg-white"
+        }`}
+      >
+        <div
+          className={`px-6 py-4 border-b ${
+            darkMode ? "border-gray-700" : "border-gray-200"
+          }`}
+        >
+          <h2
+            className={`text-lg font-semibold ${
+              darkMode ? "text-gray-200" : "text-gray-800"
+            }`}
+          >
             Allowlists
           </h2>
         </div>
@@ -357,26 +490,48 @@ const ParametersTab = ({ data, loading, error }: any) => {
           <div className="grid gap-6 md:grid-cols-2">
             {/* VP Allowlist */}
             <div>
-              <h3 className="text-md font-medium text-gray-300 mb-3">
+              <h3
+                className={`text-md font-medium mb-3 ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
                 VP Allowlist
               </h3>
-              <div className="bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
+              <div
+                className={`p-4 rounded-md max-h-60 overflow-y-auto ${
+                  darkMode ? "bg-gray-700" : "bg-gray-100"
+                }`}
+              >
                 {data.Protocol_Parameters[0].VP_allowlist.map(
                   (hash: string, i: number) => (
                     <div
                       key={i}
-                      className="text-xs font-mono text-gray-300 mb-1 break-all"
+                      className={`text-xs font-mono mb-1 break-all ${
+                        darkMode ? "text-gray-300" : "text-gray-700"
+                      }`}
                     >
                       {hash}
                     </div>
                   )
                 )}
               </div>
-              <h3 className="text-md font-medium mt-6 text-gray-300 mb-3">
+              <h3
+                className={`text-md font-medium mt-6 mb-3 ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
                 Implicit VP hash
               </h3>
-              <div className="bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
-                <div className="text-xs font-mono text-gray-300 mb-1 break-all">
+              <div
+                className={`p-4 rounded-md max-h-60 overflow-y-auto ${
+                  darkMode ? "bg-gray-700" : "bg-gray-100"
+                }`}
+              >
+                <div
+                  className={`text-xs font-mono mb-1 break-all ${
+                    darkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
                   {data.Protocol_Parameters[0].Implicit_VP_hash}
                 </div>
               </div>
@@ -384,15 +539,25 @@ const ParametersTab = ({ data, loading, error }: any) => {
 
             {/* Transactions Allowlist */}
             <div>
-              <h3 className="text-md font-medium text-gray-300 mb-3">
+              <h3
+                className={`text-md font-medium mb-3 ${
+                  darkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
                 Transactions Allowlist
               </h3>
-              <div className="bg-gray-700 p-4 rounded-md max-h-60 overflow-y-auto">
+              <div
+                className={`p-4 rounded-md max-h-60 overflow-y-auto ${
+                  darkMode ? "bg-gray-700" : "bg-gray-100"
+                }`}
+              >
                 {data.Protocol_Parameters[0].Transactions_allowlist.map(
                   (hash: string, i: number) => (
                     <div
                       key={i}
-                      className="text-xs font-mono text-gray-300 mb-1 break-all"
+                      className={`text-xs font-mono mb-1 break-all ${
+                        darkMode ? "text-gray-300" : "text-gray-700"
+                      }`}
                     >
                       {hash}
                     </div>
@@ -419,7 +584,9 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
   if (error) {
     return (
       <div
-        className={`p-4 rounded-lg bg-gray-800 text-red-400`}
+        className={`p-4 rounded-lg ${
+          darkMode ? "bg-gray-800 text-red-400" : "bg-white text-red-600"
+        }`}
       >
         <strong>Error:</strong> {error}
       </div>
@@ -431,79 +598,139 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
   return (
     <div className="space-y-6">
       {/* Current Epoch */}
-      <div className="bg-gray-800 rounded-lg shadow px-6 py-4">
-        <h2 className="text-lg font-semibold text-gray-200">
+      <div
+        className={`rounded-lg shadow px-6 py-4 ${
+          darkMode ? "bg-gray-800" : "bg-white"
+        }`}
+      >
+        <h2
+          className={`text-lg font-semibold ${
+            darkMode ? "text-gray-200" : "text-gray-800"
+          }`}
+        >
           Current Epoch:{" "}
           <span className="font-bold">{data.Last_committed_epoch}</span>
         </h2>
       </div>
 
       {/* Proposals Table */}
-      <div className="bg-gray-800 rounded-lg shadow overflow-hidden">
+      <div
+        className={`rounded-lg shadow overflow-hidden ${
+          darkMode ? "bg-gray-800" : "bg-white"
+        }`}
+      >
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-700">
-            <thead className="-gray-700">
+          <table
+            className={`min-w-full divide-y ${
+              darkMode ? "divide-gray-700" : "divide-gray-200"
+            }`}
+          >
+            <thead className={darkMode ? "bg-gray-700" : "bg-gray-50"}>
               <tr>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+                  className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                    darkMode ? "text-gray-300" : "text-gray-500"
+                  }`}
                 >
                   ID
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+                  className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                    darkMode ? "text-gray-300" : "text-gray-500"
+                  }`}
                 >
                   Type
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+                  className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                    darkMode ? "text-gray-300" : "text-gray-500"
+                  }`}
                 >
                   Author
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+                  className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                    darkMode ? "text-gray-300" : "text-gray-500"
+                  }`}
                 >
                   Start Epoch
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+                  className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                    darkMode ? "text-gray-300" : "text-gray-500"
+                  }`}
                 >
                   End Epoch
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+                  className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                    darkMode ? "text-gray-300" : "text-gray-500"
+                  }`}
                 >
                   Activation Epoch
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-gray-800 divide-y divide-gray-700">
-              {data.Proposal.map((proposal: any , index : number) => (
+            <tbody
+              className={`divide-y ${
+                darkMode
+                  ? "bg-gray-800 divide-gray-700"
+                  : "bg-white divide-gray-200"
+              }`}
+            >
+              {data.Proposal.map((proposal: any, index: number) => (
                 <tr
                   key={proposal.id}
-                  className="hover:bg-gray-50 dark:hover:bg-gray-700"
+                  className={
+                    darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                  }
                 >
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
+                      darkMode ? "text-gray-100" : "text-gray-900"
+                    }`}
+                  >
                     {index + 1}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap text-sm ${
+                      darkMode ? "text-gray-300" : "text-gray-600"
+                    }`}
+                  >
                     {proposal.Type}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300 font-mono">
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap text-sm font-mono ${
+                      darkMode ? "text-gray-300" : "text-gray-600"
+                    }`}
+                  >
                     {proposal.Author}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap text-sm ${
+                      darkMode ? "text-gray-300" : "text-gray-600"
+                    }`}
+                  >
                     {proposal.Start_Epoch}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap text-sm ${
+                      darkMode ? "text-gray-300" : "text-gray-600"
+                    }`}
+                  >
                     {proposal.End_Epoch}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap text-sm ${
+                      darkMode ? "text-gray-300" : "text-gray-600"
+                    }`}
+                  >
                     {proposal.Activation_Epoch}
                   </td>
                 </tr>
@@ -541,9 +768,17 @@ const ValidatorTab = ({ data, loading, error, darkMode }: any) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden w-full max-w-2xl">
+      <div
+        className={`rounded-xl shadow-2xl overflow-hidden w-full max-w-2xl ${
+          darkMode ? "bg-gray-800" : "bg-white"
+        }`}
+      >
         {/* Header with Avatar */}
-        <div className="bg-gray-700 p-6 flex items-center space-x-4">
+        <div
+          className={`p-6 flex items-center space-x-4 ${
+            darkMode ? "bg-gray-700" : "bg-gray-100"
+          }`}
+        >
           <img
             src={data.Avatar}
             alt="ZecHub Logo"
@@ -551,25 +786,43 @@ const ValidatorTab = ({ data, loading, error, darkMode }: any) => {
           />
           <div>
             <h1 className="text-2xl font-bold text-blue-400">{data.Name}</h1>
-            <p className="text-gray-300">{data.Description}</p>
+            <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
+              {data.Description}
+            </p>
           </div>
         </div>
 
         {/* Main Content */}
         <div className="p-6 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-700 p-4 rounded-lg">
-              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+            <div
+              className={`p-4 rounded-lg ${
+                darkMode ? "bg-gray-700" : "bg-gray-100"
+              }`}
+            >
+              <h2
+                className={`text-sm font-semibold uppercase tracking-wider ${
+                  darkMode ? "text-gray-400" : "text-gray-500"
+                }`}
+              >
                 Contact
               </h2>
               <p className="mt-2">
-                <span className="text-gray-400">Email:</span> {data.Email}
+                <span className={darkMode ? "text-gray-400" : "text-gray-500"}>
+                  Email:
+                </span>{" "}
+                {data.Email}
               </p>
               <p className="mt-1">
-                <span className="text-gray-400">Discord:</span> {data.Discord}
+                <span className={darkMode ? "text-gray-400" : "text-gray-500"}>
+                  Discord:
+                </span>{" "}
+                {data.Discord}
               </p>
               <p className="mt-1">
-                <span className="text-gray-400">Website:</span>
+                <span className={darkMode ? "text-gray-400" : "text-gray-500"}>
+                  Website:
+                </span>
                 <a
                   href={data.Website}
                   target="_blank"
@@ -581,29 +834,56 @@ const ValidatorTab = ({ data, loading, error, darkMode }: any) => {
               </p>
             </div>
 
-            <div className="bg-gray-700 p-4 rounded-lg">
-              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+            <div
+              className={`p-4 rounded-lg ${
+                darkMode ? "bg-gray-700" : "bg-gray-100"
+              }`}
+            >
+              <h2
+                className={`text-sm font-semibold uppercase tracking-wider ${
+                  darkMode ? "text-gray-400" : "text-gray-500"
+                }`}
+              >
                 Staking Details
               </h2>
               <p className="mt-2">
-                <span className="text-gray-400">Commission:</span>{" "}
+                <span className={darkMode ? "text-gray-400" : "text-gray-500"}>
+                  Commission:
+                </span>{" "}
                 {data.Commission}
               </p>
               <p className="mt-1">
-                <span className="text-gray-400">Max Change:</span>{" "}
+                <span className={darkMode ? "text-gray-400" : "text-gray-500"}>
+                  Max Change:
+                </span>{" "}
                 {data.Max_Change}
               </p>
               <p className="mt-1">
-                <span className="text-gray-400">Epoch:</span> {data.Epoch}
+                <span className={darkMode ? "text-gray-400" : "text-gray-500"}>
+                  Epoch:
+                </span>{" "}
+                {data.Epoch}
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-700 p-4 rounded-lg">
-            <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+          <div
+            className={`p-4 rounded-lg ${
+              darkMode ? "bg-gray-700" : "bg-gray-100"
+            }`}
+          >
+            <h2
+              className={`text-sm font-semibold uppercase tracking-wider ${
+                darkMode ? "text-gray-400" : "text-gray-500"
+              }`}
+            >
               Address
             </h2>
-            <p className="mt-2 font-mono text-sm break-all bg-gray-800 p-3 rounded">
+            <p
+              className={`mt-2 font-mono text-sm break-all p-3 rounded ${
+                darkMode ? "bg-gray-800" : "bg-gray-200"
+              }`}
+            >
               {data.Address}
             </p>
           </div>
