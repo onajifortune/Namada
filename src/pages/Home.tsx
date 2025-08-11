@@ -3,7 +3,7 @@ import ClientDashboard from "../components/ShieldedPool";
 
 const GovernanceDashboard = () => {
   const [activeTab, setActiveTab] = useState<
-    "parameters" | "proposals" | "validators" | "charts"
+    "parameters" | "proposals" | "validator" | "charts"
   >("parameters");
   const [darkMode, setDarkMode] = useState(false);
   const [paramsData, setParamsData] = useState<any>(null);
