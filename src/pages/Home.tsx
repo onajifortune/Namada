@@ -182,9 +182,9 @@ const GovernanceDashboard = () => {
                 Governance Proposals
               </button>
               <button
-                onClick={() => setActiveTab("validators")}
+                onClick={() => setActiveTab("validator")}
                 className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === "validators"
+                  activeTab === "validator"
                     ? "text-blue-400 border-blue-400"
                     : `border-transparent ${
                         darkMode
@@ -193,7 +193,7 @@ const GovernanceDashboard = () => {
                       }`
                 }`}
               >
-                Validators
+                Validator
               </button>
               <button
                 onClick={() => setActiveTab("charts")}
@@ -227,7 +227,7 @@ const GovernanceDashboard = () => {
               error={error.props}
               darkMode={darkMode}
             />
-          ) : activeTab === "validators" ? (
+          ) : activeTab === "validator" ? (
             <ValidatorTab
               data={validatorData}
               loading={loading.validator}
