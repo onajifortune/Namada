@@ -44,9 +44,9 @@ const Dashboard = () => {
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div className="mt-12">
-            <h1 className="text-3xl font-bold">ZecHub Dashboard</h1>
+            <h1 className="text-3xl font-bold">Namada ZecHub Dashboard</h1>
             <p className="text-muted-foreground">
-              Analyze Zcash network metrics and trends
+              Analyze Namada network metrics and trends
             </p>
           </div>
 
