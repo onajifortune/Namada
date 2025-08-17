@@ -85,7 +85,8 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
     const row: FlattenedTokenData = { Date: entry.Date };
     entry.Total_Supply.forEach((token) => {
       const value = parseFloat(token.totalSupply || "0");
-      row[token.id] = value;
+      // row[token.id] = value;
+      row[token.id] = value / 1000000;
     });
     return row;
   });
@@ -179,7 +180,7 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
                 <YAxis
                   tick={{ fontSize, fill: "#94a3b8" }}
                   tickFormatter={(value: number) =>
-                    `${(value / 1e9).toFixed(0)}B`
+                    `${(value / 1e3).toFixed(0)}k`
                   }
                 />
                 <Tooltip
