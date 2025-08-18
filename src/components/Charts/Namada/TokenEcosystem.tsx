@@ -49,6 +49,7 @@ type TokenEcosystemProps = {
   selectedTokenId: string;
   setSelectedTokenId: Dispatch<SetStateAction<string>>;
 };
+
 export default function TokenEcosystem(props: TokenEcosystemProps) {
   const [rawData, setRawData] = useState<NamadaRawData[]>([]);
   const [tokenIds, setTokenIds] = useState<string[]>([]);
@@ -85,22 +86,31 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
     const row: FlattenedTokenData = { Date: entry.Date };
     entry.Total_Supply.forEach((token) => {
       const value = parseFloat(token.totalSupply || "0");
-      // row[token.id] = value;
-      row[token.id] = value / 1000000;
+      token.id === "Namada"
+        ? (row[token.id] = value)
+        : (row[token.id] = value / 1000000);
     });
     return row;
   });
 
+  // Filter out Namada from the "all" view
   const chartData =
     props.selectedTokenId === "all"
-      ? flattenedData
+      ? flattenedData.map((d) => {
+          const filtered = { ...d };
+          delete filtered["Namada"]; // Remove Namada from "all" view
+          return filtered;
+        })
       : flattenedData.map((d) => ({
           Date: d.Date,
           [props.selectedTokenId]: d[props.selectedTokenId],
         }));
 
+  // Filter out Namada from activeTokenIds when showing "all"
   const activeTokenIds =
-    props.selectedTokenId === "all" ? tokenIds : [props.selectedTokenId];
+    props.selectedTokenId === "all"
+      ? tokenIds.filter((id) => id !== "Namada")
+      : [props.selectedTokenId];
 
   return (
     <Card
@@ -110,7 +120,7 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
       <CardHeader className="flex flex-row items-center mb-12">
         <CardTitle className="flex-1 text-xl">
           {props.selectedTokenId === "all"
-            ? "Namada Tokens Ecosystem Overview"
+            ? "Namada Tokens Ecosystem Overview (Excluding Namada)"
             : props.selectedTokenId + " Supply Chart"}
         </CardTitle>
         <div className="flex items-center gap-2">
@@ -127,7 +137,7 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
                 className="hover:cursor-pointer bg-slate-50 dark:bg-slate-800 text-background"
                 value="all"
               >
-                All Tokens
+                All Tokens (Excluding Namada)
               </SelectItem>
               {tokenIds.map((token) => (
                 <SelectItem
@@ -179,9 +189,13 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
                 <XAxis dataKey="Date" tick={{ fontSize, fill: "#94a3b8" }} />
                 <YAxis
                   tick={{ fontSize, fill: "#94a3b8" }}
-                  tickFormatter={(value: number) =>
-                    `${(value / 1e3).toFixed(0)}k`
-                  }
+                  tickFormatter={(value: number) => {
+                    // Use billions format for Namada, thousands for others
+                    if (props.selectedTokenId === "Namada") {
+                      return `${(value / 1e9).toFixed(1)}B`;
+                    }
+                    return `${(value / 1e3).toFixed(0)}k`;
+                  }}
                 />
                 <Tooltip
                   wrapperStyle={{
