@@ -149,13 +149,13 @@ const GovernanceDashboard = () => {
         </header>
 
         {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pt-[68px]">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pt-[100px] imd:pt-[68px]">
           {/* Tabs Navigation */}
           <div className="border-b border-border mb-6 transition-theme">
-            <nav className="-mb-px flex space-x-8">
+            <nav className="-mb-px flex space-x-8 flex-col imd:flex-row">
               <button
                 onClick={() => setActiveTab("parameters")}
-                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm mr-0 imd:mr-8 ${
                   activeTab === "parameters"
                     ? "text-blue-400 border-blue-400"
                     : `border-transparent ${
@@ -169,7 +169,7 @@ const GovernanceDashboard = () => {
               </button>
               <button
                 onClick={() => setActiveTab("proposals")}
-                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm mr-0 imd:mr-8 ${
                   activeTab === "proposals"
                     ? "text-blue-400 border-blue-400"
                     : `border-transparent ${
@@ -183,7 +183,7 @@ const GovernanceDashboard = () => {
               </button>
               <button
                 onClick={() => setActiveTab("validator")}
-                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm mr-0 imd:mr-8 ${
                   activeTab === "validator"
                     ? "text-blue-400 border-blue-400"
                     : `border-transparent ${
