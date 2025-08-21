@@ -117,7 +117,7 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
       ref={props.divChartRef}
       className="shadow-sm border border-gray-200 dark:border-slate-700"
     >
-      <CardHeader className="flex flex-row items-center mb-12">
+      <CardHeader className="flex imd:flex-row items-center mb-12">
         <CardTitle className="flex-1 text-xl">
           {props.selectedTokenId === "all"
             ? "Namada Tokens Ecosystem Overview (Excluding Namada)"
@@ -152,7 +152,7 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
           </Select>
         </div>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 px-2 imd:px-6">
         <div className="relative">
           <ResponsiveContainer width="100%" height={420}>
             {loading ? (
@@ -206,7 +206,7 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
                   verticalAlign="bottom"
                   align="center"
                   content={() => (
-                    <div className="pt-5 flex justify-center gap-6 text-sm mt-2 text-slate-600 dark:text-slate-300">
+                    <div className="pt-5 flex justify-center gap-6 text-sm mt-2 text-slate-600 dark:text-slate-300 flex-row flex-wrap">
                       {activeTokenIds.map((id, index) => (
                         <div key={id} className="flex items-center gap-2">
                           <span

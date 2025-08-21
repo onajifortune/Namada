@@ -12,9 +12,9 @@ const ChartFooter = (props: ChartFooterProps) => {
     <>
       {props.lastUpdatedDate && (
         <div
+          className="flex items-baseline"
           style={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "space-between",
             marginTop: 48,
           }}

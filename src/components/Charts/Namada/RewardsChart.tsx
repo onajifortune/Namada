@@ -267,10 +267,10 @@ const RewardChart = (props: RewardChartProps) => {
   return (
     <div
       ref={props.divChartRef}
-      className="bg-white dark:bg-slate-900 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700"
+      className="bg-white dark:bg-slate-900 px-4 py-6 imd:px-6 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700"
       style={{ width: "100%" }}
     >
-      <div className="flex flex-col sm:flex-row  gap-4 mb-12 space-y-1.5 items-center">
+      <div className="flex flex-col imd:flex-row  gap-4 mb-12 space-y-1.5 items-center">
         <CardTitle className="flex-1 text-xl">
           Staked Ratio / Annual Rewards / Inflation
         </CardTitle>
@@ -357,7 +357,10 @@ const RewardChart = (props: RewardChartProps) => {
 
       <div className="flex justify-center gap-6 text-sm my-6 text-slate-600 dark:text-slate-300">
         {[namadaRewards[namadaRewards.length - 1]].map((id, index) => (
-          <div key={id.Date.toString()} className="flex items-center space-x-4">
+          <div
+            key={id.Date.toString()}
+            className="flex items-center space-x-4 flex-wrap gap-8"
+          >
             <div key={index} className="flex items-center space-x-1">
               <span
                 className="w-3 h-3 inline-block rounded-sm"
