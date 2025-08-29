@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ClientDashboard from "../components/ShieldedPool";
+import { DATA_URL } from "../components/lib/chart/data-url";
 
 const GovernanceDashboard = () => {
   const [activeTab, setActiveTab] = useState<
@@ -30,9 +31,7 @@ const GovernanceDashboard = () => {
     // Fetch Parameters Data
     const fetchParams = async () => {
       try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/ZecHub/zechub-wiki/main/public/data/namada/protocol_parameters.json"
-        );
+        const response = await fetch(DATA_URL.protocol_parametersUrl);
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const jsonData = await response.json();
@@ -51,9 +50,10 @@ const GovernanceDashboard = () => {
     // Fetch Proposals Data
     const fetchProps = async () => {
       try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/ZecHub/zechub-wiki/main/public/data/namada/props.json"
-        );
+        // const response = await fetch(
+        //   "https://raw.githubusercontent.com/ZecHub/zechub-wiki/main/public/data/namada/props.json"
+        // );
+        const response = await fetch(DATA_URL.proposalsUrl);
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const jsonData = await response.json();
@@ -72,9 +72,7 @@ const GovernanceDashboard = () => {
     // Fetch Validator Data
     const fetchValidator = async () => {
       try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/ZecHub/zechub-wiki/main/public/data/namada/zechub.json"
-        );
+        const response = await fetch(DATA_URL.zechubUrl);
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const jsonData = await response.json();

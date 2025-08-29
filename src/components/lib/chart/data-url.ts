@@ -17,4 +17,7 @@ export const DATA_URL = {
   blockchairUrl:
     "https://api.blockchair.com/zcash/stats?key=A___wNpGniYbmkv7tLpMfOPBGe2as7vI",
   namadaRewardUrl: "/data/namada_rewards_rate.json",
+  proposalsUrl: "/data/props.json",
+  zechubUrl: "/data/zechub.json",
+  protocol_parametersUrl: "/data/protocol_parameters.json",
 } as const;
