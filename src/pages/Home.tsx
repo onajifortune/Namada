@@ -631,6 +631,14 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
                     darkMode ? "text-gray-300" : "text-gray-500"
                   }`}
                 >
+                  {"#"}
+                </th>
+                <th
+                  scope="col"
+                  className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                    darkMode ? "text-gray-300" : "text-gray-500"
+                  }`}
+                >
                   ID
                 </th>
                 <th
@@ -682,57 +690,66 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
                   : "bg-white divide-gray-200"
               }`}
             >
-              {data.Proposal.map((proposal: any, index: number) => (
-                <tr
-                  key={proposal.id}
-                  className={
-                    darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
-                  }
-                >
-                  <td
-                    className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
-                      darkMode ? "text-gray-100" : "text-gray-900"
-                    }`}
+              {data.Proposal.sort((a: any, b: any) => b.id - a.id).map(
+                (proposal: any, index: number) => (
+                  <tr
+                    key={proposal.id}
+                    className={
+                      darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                    }
                   >
-                    {index + 1}
-                  </td>
-                  <td
-                    className={`px-6 py-4 whitespace-nowrap text-sm ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    {proposal.Type}
-                  </td>
-                  <td
-                    className={`px-6 py-4 whitespace-nowrap text-sm font-mono ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    {proposal.Author}
-                  </td>
-                  <td
-                    className={`px-6 py-4 whitespace-nowrap text-sm ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    {proposal.Start_Epoch}
-                  </td>
-                  <td
-                    className={`px-6 py-4 whitespace-nowrap text-sm ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    {proposal.End_Epoch}
-                  </td>
-                  <td
-                    className={`px-6 py-4 whitespace-nowrap text-sm ${
-                      darkMode ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    {proposal.Activation_Epoch}
-                  </td>
-                </tr>
-              ))}
+                    <td
+                      className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
+                        darkMode ? "text-gray-100" : "text-gray-900"
+                      }`}
+                    >
+                      {index + 1}
+                    </td>
+                    <td
+                      className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
+                        darkMode ? "text-gray-100" : "text-gray-900"
+                      }`}
+                    >
+                      {proposal.id}
+                    </td>
+                    <td
+                      className={`px-6 py-4 whitespace-nowrap text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {proposal.Type}
+                    </td>
+                    <td
+                      className={`px-6 py-4 whitespace-nowrap text-sm font-mono ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {proposal.Author}
+                    </td>
+                    <td
+                      className={`px-6 py-4 whitespace-nowrap text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {proposal.Start_Epoch}
+                    </td>
+                    <td
+                      className={`px-6 py-4 whitespace-nowrap text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {proposal.End_Epoch}
+                    </td>
+                    <td
+                      className={`px-6 py-4 whitespace-nowrap text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {proposal.Activation_Epoch}
+                    </td>
+                  </tr>
+                )
+              )}
             </tbody>
           </table>
         </div>
