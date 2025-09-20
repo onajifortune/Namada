@@ -10,6 +10,8 @@ import ChartFooter from "../ChartFooter";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../Tabs";
 import RewardChart from "./RewardsChart";
 import TokenEcosystem from "./TokenEcosystem";
+import ShieldedTokenEcosystem from "./ShieldedTokenEcosystem";
+import TransparentTokenEcosystem from "./TransparentTokenEcosystem";
 
 type NamadaChartProps = {
   lastUpdated: Date;
@@ -30,7 +32,12 @@ type NamadaChartProps = {
 function NamadaChart(props: NamadaChartProps) {
   const [selectedTokenId, setSelectedTokenId] = useState<string>("all");
   const [activeTab, setActiveTab] = useState("supply");
-  const tabLabels = ["Supply", "Rewards"];
+  const tabLabels = [
+    "Total Supply",
+    "Shielded Supply",
+    "Transparent Supply",
+    "Rewards",
+  ];
 
   return (
     <ErrorBoundary fallback="Failed to render Namada Chart">
@@ -60,8 +67,24 @@ function NamadaChart(props: NamadaChartProps) {
                     ))}
                   </TabsList>
 
-                  <TabsContent value="supply" activeTab={activeTab}>
+                  <TabsContent value="total supply" activeTab={activeTab}>
                     <TokenEcosystem
+                      divChartRef={props.divChartRef}
+                      selectedTokenId={selectedTokenId}
+                      setSelectedTokenId={setSelectedTokenId}
+                    />
+                  </TabsContent>
+
+                  <TabsContent value="shielded supply" activeTab={activeTab}>
+                    <ShieldedTokenEcosystem
+                      divChartRef={props.divChartRef}
+                      selectedTokenId={selectedTokenId}
+                      setSelectedTokenId={setSelectedTokenId}
+                    />
+                  </TabsContent>
+
+                  <TabsContent value="transparent supply" activeTab={activeTab}>
+                    <TransparentTokenEcosystem
                       divChartRef={props.divChartRef}
                       selectedTokenId={selectedTokenId}
                       setSelectedTokenId={setSelectedTokenId}
