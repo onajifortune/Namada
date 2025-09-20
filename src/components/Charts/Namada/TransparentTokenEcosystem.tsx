@@ -33,26 +33,15 @@ import {
 
 import { NamadaAsset, NamadaRawData } from "../../lib/chart/types";
 
-// type NamadaAsset = {
-//   id: string;
-//   totalSupply: string;
-//   shieldedSupply: string;
-//   transparentSupply: string;
-// };
-
-// type NamadaRawData = {
-//   Date: string;
-//   Total_Supply: NamadaAsset[];
-//   Native_Supply_NAM: string;
-// };
-
-type TokenEcosystemProps = {
+type TransparentTokenEcosystemProps = {
   divChartRef: RefObject<HTMLDivElement | null>;
   selectedTokenId: string;
   setSelectedTokenId: Dispatch<SetStateAction<string>>;
 };
 
-export default function TokenEcosystem(props: TokenEcosystemProps) {
+export default function TransparentTokenEcosystem(
+  props: TransparentTokenEcosystemProps
+) {
   const [rawData, setRawData] = useState<NamadaRawData[]>([]);
   const [tokenIds, setTokenIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -87,7 +76,7 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
   const flattenedData: FlattenedTokenData[] = rawData.map((entry) => {
     const row: FlattenedTokenData = { Date: entry.Date };
     entry.Total_Supply.forEach((token) => {
-      const value = parseFloat(token.totalSupply || "0");
+      const value = parseFloat(token.transparentSupply || "0");
       token.id === "Namada"
         ? (row[token.id] = value)
         : (row[token.id] = value / 1000000);
@@ -122,8 +111,8 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
       <CardHeader className="flex imd:flex-row items-center mb-12">
         <CardTitle className="flex-1 text-xl">
           {props.selectedTokenId === "all"
-            ? "Namada Tokens Ecosystem Overview (Excluding Namada)"
-            : props.selectedTokenId + " Supply Chart"}
+            ? "Namada Tokens Transparent Supply Overview (Excluding Namada)"
+            : props.selectedTokenId + " Transparent Supply Chart"}
         </CardTitle>
         <div className="flex items-center gap-2">
           <label className="text-sm font-medium">Filter by Token</label>

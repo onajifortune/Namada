@@ -7,7 +7,18 @@ export interface BlockchainInfo {
 }
 
 export type PoolKey = "default" | "sprout" | "sapling" | "orchard";
-export type NamadaAsset = { id: string; totalSupply: string };
+export type NamadaAsset = {
+  id: string;
+  totalSupply: string;
+  shieldedSupply: string;
+  transparentSupply: string;
+};
+
+export type NamadaRawData = {
+  Date: string;
+  Total_Supply: NamadaAsset[];
+  Native_Supply_NAM: string;
+};
 export type SupplyData = { close: string; supply: number };
 export type ShieldedTxCount = {
   sapling: number;
