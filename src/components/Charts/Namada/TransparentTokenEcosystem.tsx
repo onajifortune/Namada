@@ -60,7 +60,7 @@ export default function TransparentTokenEcosystem(
         );
         setRawData(data || []);
 
-        const firstEntry = data?.[0]?.Total_Supply || [];
+        const firstEntry = data?.[100]?.Total_Supply || [];
         setTokenIds(firstEntry.map((t: NamadaAsset) => t.id));
       } catch (err) {
         console.error("Failed to fetch namada data:", err);

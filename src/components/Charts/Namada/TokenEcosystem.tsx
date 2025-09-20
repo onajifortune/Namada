@@ -71,7 +71,7 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
         );
         setRawData(data || []);
 
-        const firstEntry = data?.[0]?.Total_Supply || [];
+        const firstEntry = data?.[100]?.Total_Supply || [];
         setTokenIds(firstEntry.map((t: NamadaAsset) => t.id));
       } catch (err) {
         console.error("Failed to fetch namada data:", err);
@@ -107,7 +107,6 @@ export default function TokenEcosystem(props: TokenEcosystemProps) {
           Date: d.Date,
           [props.selectedTokenId]: d[props.selectedTokenId],
         }));
-
   // Filter out Namada from activeTokenIds when showing "all"
   const activeTokenIds =
     props.selectedTokenId === "all"
