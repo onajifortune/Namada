@@ -31,7 +31,7 @@ type NamadaChartProps = {
 
 function NamadaChart(props: NamadaChartProps) {
   const [selectedTokenId, setSelectedTokenId] = useState<string>("all");
-  const [activeTab, setActiveTab] = useState("supply");
+  const [activeTab, setActiveTab] = useState("total supply");
   const tabLabels = [
     "Total Supply",
     "Shielded Supply",
