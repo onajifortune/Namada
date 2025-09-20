@@ -181,11 +181,26 @@ export default function TransparentTokenEcosystem(
                 <YAxis
                   tick={{ fontSize, fill: "#94a3b8" }}
                   tickFormatter={(value: number) => {
-                    // Use billions format for Namada, thousands for others
+                    // Use billions format for Namada
                     if (props.selectedTokenId === "Namada") {
                       return `${(value / 1e9).toFixed(1)}B`;
                     }
-                    return `${(value / 1e3).toFixed(0)}k`;
+
+                    // Adaptive formatting for other tokens
+                    if (value >= 1000000) {
+                      return `${(value / 1e6).toFixed(1)}M`;
+                    } else if (value >= 1000) {
+                      return `${(value / 1e3).toFixed(0)}k`;
+                    } else if (value >= 1) {
+                      return `${value.toFixed(0)}`;
+                    } else if (value >= 0.1) {
+                      return `${value.toFixed(1)}`;
+                    } else if (value >= 0.01) {
+                      return `${value.toFixed(2)}`;
+                    } else if (value > 0) {
+                      return `${value.toFixed(3)}`;
+                    }
+                    return "0";
                   }}
                 />
                 <Tooltip
