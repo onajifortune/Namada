@@ -53,7 +53,7 @@ const GovernanceDashboard = () => {
         // const response = await fetch(
         //   "https://raw.githubusercontent.com/ZecHub/zechub-wiki/main/public/data/namada/props.json"
         // );
-        const response = await fetch(DATA_URL.proposalsUrl);
+        const response = await fetch(DATA_URL.propsDetailsUrl);
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const jsonData = await response.json();
@@ -571,6 +571,28 @@ const ParametersTab = ({ data, loading, error, darkMode }: any) => {
 };
 
 const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+
+  const toggleExpand = (id: number) => {
+    setExpandedId(expandedId === id ? null : id);
+  };
+
+  const parseResult = (resultString: string) => {
+    if (!resultString) return null;
+
+    const addressMatch = resultString.match(/(\d+)\s+addresses/);
+    const yaysMatch = resultString.match(/(\d+)\s+yays/);
+    const naysMatch = resultString.match(/(\d+)\s+nays/);
+    const abstainsMatch = resultString.match(/(\d+)\s+abstains/);
+
+    return {
+      addresses: addressMatch ? parseInt(addressMatch[1]) : 0,
+      yays: yaysMatch ? parseInt(yaysMatch[1]) : 0,
+      nays: naysMatch ? parseInt(naysMatch[1]) : 0,
+      abstains: abstainsMatch ? parseInt(abstainsMatch[1]) : 0,
+    };
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -690,65 +712,278 @@ const ProposalsTab = ({ data, loading, error, darkMode }: any) => {
                   : "bg-white divide-gray-200"
               }`}
             >
-              {data.Proposal.sort((a: any, b: any) => b.id - a.id).map(
-                (proposal: any, index: number) => (
-                  <tr
-                    key={proposal.id}
-                    className={
-                      darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
-                    }
-                  >
-                    <td
-                      className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
-                        darkMode ? "text-gray-100" : "text-gray-900"
-                      }`}
-                    >
-                      {index + 1}
-                    </td>
-                    <td
-                      className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
-                        darkMode ? "text-gray-100" : "text-gray-900"
-                      }`}
-                    >
-                      {proposal.id}
-                    </td>
-                    <td
-                      className={`px-6 py-4 whitespace-nowrap text-sm ${
-                        darkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
-                      {proposal.Type}
-                    </td>
-                    <td
-                      className={`px-6 py-4 whitespace-nowrap text-sm font-mono ${
-                        darkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
-                      {proposal.Author}
-                    </td>
-                    <td
-                      className={`px-6 py-4 whitespace-nowrap text-sm ${
-                        darkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
-                      {proposal.Start_Epoch}
-                    </td>
-                    <td
-                      className={`px-6 py-4 whitespace-nowrap text-sm ${
-                        darkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
-                      {proposal.End_Epoch}
-                    </td>
-                    <td
-                      className={`px-6 py-4 whitespace-nowrap text-sm ${
-                        darkMode ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
-                      {proposal.Activation_Epoch}
-                    </td>
-                  </tr>
-                )
+              {data.Proposal.sort((a: any, b: any) => b.Id - a.Id).map(
+                (proposal: any, index: number) => {
+                  const result = parseResult(proposal.Result);
+                  const totalVotes = result
+                    ? result.yays + result.nays + result.abstains
+                    : 0;
+                  const yayPercentage =
+                    result && totalVotes > 0
+                      ? (result.yays / totalVotes) * 100
+                      : 0;
+                  const nayPercentage =
+                    result && totalVotes > 0
+                      ? (result.nays / totalVotes) * 100
+                      : 0;
+                  const abstainPercentage =
+                    result && totalVotes > 0
+                      ? (result.abstains / totalVotes) * 100
+                      : 0;
+
+                  return (
+                    <>
+                      <tr
+                        key={proposal.Id}
+                        onClick={() => toggleExpand(proposal.Id)}
+                        className={`cursor-pointer ${
+                          darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                        }`}
+                      >
+                        <td
+                          className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
+                            darkMode ? "text-gray-100" : "text-gray-900"
+                          }`}
+                        >
+                          {index + 1}
+                        </td>
+                        <td
+                          className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
+                            darkMode ? "text-gray-100" : "text-gray-900"
+                          }`}
+                        >
+                          {proposal.Id}
+                        </td>
+                        <td
+                          className={`px-6 py-4 whitespace-nowrap text-sm ${
+                            darkMode ? "text-gray-300" : "text-gray-600"
+                          }`}
+                        >
+                          {proposal.Type}
+                        </td>
+                        <td
+                          className={`px-6 py-4 whitespace-nowrap text-sm font-mono ${
+                            darkMode ? "text-gray-300" : "text-gray-600"
+                          }`}
+                        >
+                          {proposal.Author}
+                        </td>
+                        <td
+                          className={`px-6 py-4 whitespace-nowrap text-sm ${
+                            darkMode ? "text-gray-300" : "text-gray-600"
+                          }`}
+                        >
+                          {proposal.Start_Epoch}
+                        </td>
+                        <td
+                          className={`px-6 py-4 whitespace-nowrap text-sm ${
+                            darkMode ? "text-gray-300" : "text-gray-600"
+                          }`}
+                        >
+                          {proposal.End_Epoch}
+                        </td>
+                        <td
+                          className={`px-6 py-4 whitespace-nowrap text-sm ${
+                            darkMode ? "text-gray-300" : "text-gray-600"
+                          }`}
+                        >
+                          {proposal.Activation_Epoch}
+                        </td>
+                      </tr>
+                      {expandedId === proposal.Id && (
+                        <tr key={`content-${proposal.Id}`}>
+                          <td
+                            colSpan={7}
+                            className={`px-6 py-6 max-w-[73rem] ${
+                              darkMode ? "bg-gray-900" : "bg-gray-50"
+                            }`}
+                          >
+                            {/* Proposal Content */}
+                            <div className="space-y-4">
+                              {proposal.Content &&
+                                Object.keys(proposal.Content)
+                                  .reverse()
+                                  .map((key) => (
+                                    <div key={key}>
+                                      <div
+                                        className={`font-semibold text-sm uppercase mb-1 ${
+                                          darkMode
+                                            ? "text-gray-400"
+                                            : "text-gray-600"
+                                        }`}
+                                      >
+                                        {key.replace(/-/g, " ")}
+                                      </div>
+                                      <div
+                                        className={`text-sm whitespace-pre-wrap ${
+                                          darkMode
+                                            ? "text-gray-300"
+                                            : "text-gray-700"
+                                        }`}
+                                      >
+                                        {proposal.Content[key]}
+                                      </div>
+                                    </div>
+                                  ))}
+                            </div>
+                            {/* Voting Results */}
+                            {result && (
+                              <div
+                                className={`mt-6 p-4 rounded-lg ${
+                                  darkMode ? "bg-gray-800" : "bg-white"
+                                }`}
+                              >
+                                <h3
+                                  className={`text-lg font-semibold mb-4 ${
+                                    darkMode ? "text-gray-200" : "text-gray-800"
+                                  }`}
+                                >
+                                  Voting Results
+                                </h3>
+
+                                {/* Total Addresses */}
+                                <div className="mb-4">
+                                  <span
+                                    className={`text-sm ${
+                                      darkMode
+                                        ? "text-gray-400"
+                                        : "text-gray-600"
+                                    }`}
+                                  >
+                                    Total Addresses:
+                                  </span>
+                                  <span
+                                    className={`ml-2 text-sm font-semibold ${
+                                      darkMode
+                                        ? "text-gray-200"
+                                        : "text-gray-800"
+                                    }`}
+                                  >
+                                    {result.addresses.toLocaleString()}
+                                  </span>
+                                </div>
+
+                                {/* Vote Breakdown */}
+                                <div className="space-y-3">
+                                  {/* Yays */}
+                                  <div>
+                                    <div className="flex justify-between mb-1">
+                                      <span
+                                        className={`text-sm font-medium ${
+                                          darkMode
+                                            ? "text-green-400"
+                                            : "text-green-600"
+                                        }`}
+                                      >
+                                        Yays
+                                      </span>
+                                      <span
+                                        className={`text-sm font-semibold ${
+                                          darkMode
+                                            ? "text-green-400"
+                                            : "text-green-600"
+                                        }`}
+                                      >
+                                        {result.yays.toLocaleString()} (
+                                        {yayPercentage.toFixed(1)}%)
+                                      </span>
+                                    </div>
+                                    <div
+                                      className={`w-full rounded-full h-2.5 ${
+                                        darkMode ? "bg-gray-700" : "bg-gray-200"
+                                      }`}
+                                    >
+                                      <div
+                                        className="bg-green-500 h-2.5 rounded-full"
+                                        style={{ width: `${yayPercentage}%` }}
+                                      ></div>
+                                    </div>
+                                  </div>
+
+                                  {/* Nays */}
+                                  <div>
+                                    <div className="flex justify-between mb-1">
+                                      <span
+                                        className={`text-sm font-medium ${
+                                          darkMode
+                                            ? "text-red-400"
+                                            : "text-red-600"
+                                        }`}
+                                      >
+                                        Nays
+                                      </span>
+                                      <span
+                                        className={`text-sm font-semibold ${
+                                          darkMode
+                                            ? "text-red-400"
+                                            : "text-red-600"
+                                        }`}
+                                      >
+                                        {result.nays.toLocaleString()} (
+                                        {nayPercentage.toFixed(1)}%)
+                                      </span>
+                                    </div>
+                                    <div
+                                      className={`w-full rounded-full h-2.5 ${
+                                        darkMode ? "bg-gray-700" : "bg-gray-200"
+                                      }`}
+                                    >
+                                      <div
+                                        className="bg-red-500 h-2.5 rounded-full"
+                                        style={{ width: `${nayPercentage}%` }}
+                                      ></div>
+                                    </div>
+                                  </div>
+
+                                  {/* Abstains */}
+                                  <div>
+                                    <div className="flex justify-between mb-1">
+                                      <span
+                                        className={`text-sm font-medium ${
+                                          darkMode
+                                            ? "text-gray-400"
+                                            : "text-gray-600"
+                                        }`}
+                                      >
+                                        Abstains
+                                      </span>
+                                      <span
+                                        className={`text-sm font-semibold ${
+                                          darkMode
+                                            ? "text-gray-400"
+                                            : "text-gray-600"
+                                        }`}
+                                      >
+                                        {result.abstains.toLocaleString()} (
+                                        {abstainPercentage.toFixed(1)}%)
+                                      </span>
+                                    </div>
+                                    <div
+                                      className={`w-full rounded-full h-2.5 ${
+                                        darkMode ? "bg-gray-700" : "bg-gray-200"
+                                      }`}
+                                    >
+                                      <div
+                                        className={`h-2.5 rounded-full ${
+                                          darkMode
+                                            ? "bg-gray-500"
+                                            : "bg-gray-400"
+                                        }`}
+                                        style={{
+                                          width: `${abstainPercentage}%`,
+                                        }}
+                                      ></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      )}
+                    </>
+                  );
+                }
               )}
             </tbody>
           </table>
