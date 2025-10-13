@@ -1,16 +1,43 @@
+import { useEffect, useState } from "react";
 import { ExportButton } from "./ExportButton";
 import SupplyDataLastUpdated from "./LastUpdated";
+import { getCommitUrlForTab, getLastUpdatedDate } from "../lib/chart/helpers";
 
 type ChartFooterProps = {
-  lastUpdatedDate: Date;
+  lastUpdatedDate: string;
   handleSaveToPng: any;
   imgLabel: string;
 };
 
 const ChartFooter = (props: ChartFooterProps) => {
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  useEffect(() => {
+    console.log('props' , props.lastUpdatedDate)
+      const controller = new AbortController();
+  
+      const fetchAllData = async () => {
+        try {
+          const [lastUpdated] = await Promise.all([
+            getLastUpdatedDate(getCommitUrlForTab(props.lastUpdatedDate), controller.signal),
+          ]);
+  
+          if (lastUpdated) {
+            setLastUpdated(new Date(lastUpdated));
+          }
+        } catch (err) {
+          console.error("Error fetching dashboard data:", err);
+        }
+      };
+  
+      fetchAllData();
+  
+      return () => {
+        controller.abort();
+      };
+    }, [props.lastUpdatedDate]);
   return (
     <>
-      {props.lastUpdatedDate && (
+      {lastUpdated && (
         <div
           className="flex items-baseline"
           style={{
@@ -19,7 +46,7 @@ const ChartFooter = (props: ChartFooterProps) => {
             marginTop: 48,
           }}
         >
-          <SupplyDataLastUpdated lastUpdated={props.lastUpdatedDate} />
+          <SupplyDataLastUpdated lastUpdated={lastUpdated} />
 
           <ExportButton
             handleSaveToPng={props.handleSaveToPng}
