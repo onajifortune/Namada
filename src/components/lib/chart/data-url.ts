@@ -11,7 +11,7 @@ export const DATA_URL = {
   shieldedTxCountUrl: "/data/zcash/shieldedtxcount.json",
   issuanceUrl: "/data/zcash/issuance.json",
   shieldedUrl:
-    "https://api.github.com/repos/ZecHub/zechub-wiki/commits?path=public/data/shielded_supply.json",
+    "https://api.github.com/repos/ZecHub/Namada/commits?path=public/data/shielded_supply.json",
   namadaSupplyUrl: "/data/namada_supply.json",
   blockchainInfoUrl: "/api/blockchain-info",
   blockchairUrl:
@@ -21,4 +21,14 @@ export const DATA_URL = {
   propsDetailsUrl: "/data/proposals/propsDetails.json",
   zechubUrl: "/data/zechub.json",
   protocol_parametersUrl: "/data/protocol_parameters.json",
+} as const;
+
+
+export const DATE_URL = {
+  namadaSupplyUrl: "https://api.github.com/repos/ZecHub/Namada/commits?path=public/data/namada_supply.json&per_page=1",
+  namadaRewardUrl: "https://api.github.com/repos/ZecHub/Namada/commits?path=public/data/namada_rewards_rate.json&per_page=1",
+  proposalsUrl: "https://api.github.com/repos/ZecHub/Namada/commits?path=public/data/props.json&per_page=1",
+  propsDetailsUrl: "https://api.github.com/repos/ZecHub/Namada/commits?path=public/data/proposals/propsDetails.json&per_page=1",
+  zechubUrl: "https://api.github.com/repos/ZecHub/Namada/commits?path=public/data/zechub.json&per_page=1",
+  protocol_parametersUrl: "https://api.github.com/repos/ZecHub/Namada/commits?path=public/data/protocol_parameters.json&per_page=1",
 } as const;
